@@ -1,0 +1,126 @@
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+.hero-section {
+  position: relative;
+  height: 100vh;
+  background: url(../img/background-hero-section-smk-inovasi-digital-manado.avif)
+    no-repeat center;
+  background-size: cover;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+}
+
+.card-text {
+  text-align: justify;
+}
+
+.img-jurusan {
+  height: 12.5rem;
+  object-fit: cover;
+}
+
+.bi-lightbulb:hover {
+  color: #ffd700;
+  transition: color 0.3s ease;
+}
+
+.bi-people:hover {
+  color: #00bfff;
+  transition: color 0.3s ease;
+}
+
+.bi-bullseye:hover {
+  color: #32cd32;
+  transition: color 0.3s ease;
+}
+
+.bi-award:hover {
+  color: #e4a11b;
+  transition: color 0.3s ease;
+}
+
+.bi-buildings:hover {
+  color: #3071a9;
+  transition: color 0.3s ease;
+}
+
+.bi-people-alumni:hover {
+  color: #146c43;
+  transition: color 0.3s ease;
+}
+
+@media (max-width: 1199px) {
+  .card-text {
+    text-align: start;
+  }
+}
+
+.img-bg-shadow {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 20%,
+    rgba(0, 0, 0, 0.2) 80%
+  );
+}
+
+.news-text {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 1024px) {
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .card {
+    transition: transform 0.3s;
+  }
+}
+
+.carousel-control-prev-icon {
+  background-color: #007bff;
+  border-radius: 50%;
+}
+
+.carousel-control-next-icon {
+  background-color: #007bff;
+  border-radius: 50%;
+  color: #32cd32;
+}
+
+footer {
+  background-color: #343a40;
+  color: #fff;
+  padding: 3rem 0;
+}
+
+.social-icons a {
+  font-size: 1.25rem;
+}
+
+.rounded-circle {
+  object-fit: cover;
+  height: 60px;
+  width: 60px;
+}

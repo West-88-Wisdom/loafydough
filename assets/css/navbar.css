@@ -1,0 +1,84 @@
+/* Navbar component implemented following the tutorial by Code_Jungle:
+    • YouTube: https://www.youtube.com/@CodeJungle
+    • Instagram: https://www.instagram.com/code.jungle/
+    • GitHub: https://github.com/codeboysk
+    • Video Reference: https://youtu.be/h5apE3E72wY?si=9W9CfMttM9Fk8WGT
+    Thank you, @Code_Jungle, for the clear guidance! */
+
+.navbar-toggler {
+  border: none;
+  font-size: 1.25rem;
+}
+
+.navbar {
+  background-color: #fff;
+  height: 80px;
+  margin: 20px;
+  border-radius: 16px;
+  padding: 0.5rem;
+}
+
+.navbar-toggler:focus,
+.button-close:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.link-nav {
+  color: #666777;
+  font-weight: 500;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  .nav-link:hover,
+  .nav-link.active {
+    color: #000;
+  }
+
+  .link-nav::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px;
+    background-color: #2074d3;
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+  }
+
+  .link-nav:hover::before,
+  .link-nav.active::before {
+    width: 100%;
+    visibility: visible;
+    color: #2074d3;
+  }
+
+  .link-nav-dropdown::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0%;
+    height: 2px;
+    background-color: #2074d3;
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+  }
+
+  .link-nav-dropdown:hover::before,
+  .link-nav-dropdown.active::before {
+    width: 50%;
+    visibility: visible;
+    color: #2074d3;
+  }
+}
+
+.link-nav-dropdown {
+  color: #666777;
+  font-weight: 500;
+  position: relative;
+}

@@ -1,0 +1,39 @@
+/* Footer component adapted from @anonymous on BootstrapExamples:
+  • Author: @anonymous (https://bootstrapexamples.com/@anonymous)
+  • Original code: https://bootstrapexamples.com/@anonymous/footer-4
+    Thank you, @anonymous, for the excellent footer template! */
+
+.bi-facebook:hover {
+  color: #007bff;
+}
+.bi-facebook {
+  transition: color 0.3s ease;
+}
+
+.bi-instagram:hover {
+  background: linear-gradient(45deg, #833ab4, #e1306c, #f77737);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: color 0.3s ease;
+}
+
+.bi-tiktok:hover {
+  color: #ff0050;
+}
+.bi-tiktok {
+  transition: color 0.3s ease;
+}
+
+.bi-youtube:hover {
+  color: #cc0000;
+}
+
+.bi-youtube {
+  transition: color 0.3s ease;
+}
+
+.link-footer:hover {
+  color: #007bff !important;
+  transition: color 0.3s ease;
+}
