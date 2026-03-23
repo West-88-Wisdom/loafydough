@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Loafy Dough — Contact</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .contact-wrap { padding:70px 32px 90px; }
+    .contact-inner { max-width:1140px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
+
+    /* INFO SIDE */
+    .info-side .section-sub { margin-bottom:36px; }
+    .info-card {
+      display:flex; gap:18px; align-items:flex-start;
+      padding:22px; background:var(--pink-soft); border-radius:18px;
+      border:1px solid var(--pink-light); margin-bottom:14px;
+      transition:transform .2s;
+    }
+    .info-card:hover { transform:translateX(4px); }
+    .info-icon {
+      width:50px; height:50px; border-radius:14px;
+      background:var(--pink-light); display:flex; align-items:center;
+      justify-content:center; font-size:1.4rem; flex-shrink:0;
+    }
+    .info-card h4 { font-weight:600; color:var(--brown); margin-bottom:4px; font-size:.95rem; }
+    .info-card p { font-size:.88rem; color:var(--text-soft); line-height:1.65; }
+    .info-card a { color:var(--brown); text-decoration:none; }
+    .info-card a:hover { color:var(--pink); }
+
+    /* HOURS */
+    .hours-table { width:100%; margin-top:6px; }
+    .hours-row { display:flex; justify-content:space-between; font-size:.88rem; padding:5px 0; border-bottom:1px solid var(--pink-light); }
+    .hours-row:last-child { border:none; }
+    .hours-row .day { color:var(--text-mid); font-weight:500; }
+    .hours-row .time { color:var(--text-soft); }
+
+    /* FORM SIDE */
+    .form-box {
+      background:var(--pink-soft); border-radius:24px; padding:36px;
+      border:1px solid var(--pink-light);
+    }
+    .form-box h3 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.5rem; color:var(--brown); margin-bottom:22px;
+    }
+    .fg { margin-bottom:16px; }
+    .fg label { display:block; font-size:.78rem; font-weight:500; letter-spacing:.07em; text-transform:uppercase; color:var(--text-mid); margin-bottom:6px; }
+    .fg input, .fg select, .fg textarea {
+      width:100%; padding:12px 16px; border-radius:12px;
+      border:1.5px solid var(--pink-light); background:var(--white);
+      font-family:'DM Sans',sans-serif; font-size:.92rem; color:var(--text-dark);
+      outline:none; transition:border .2s;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--pink); }
+    .fg textarea { min-height:120px; resize:vertical; }
+    .fg-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .send-btn {
+      width:100%; padding:14px; background:var(--brown); color:#fff;
+      border:none; border-radius:32px; font-size:.95rem; font-weight:500;
+      font-family:'DM Sans',sans-serif; cursor:pointer; letter-spacing:.04em;
+      margin-top:8px; transition:all .2s;
+    }
+    .send-btn:hover { background:var(--brown-strip); transform:translateY(-1px); }
+
+    /* MAP */
+    /* SOCIAL */
+    .social-section { padding:0 32px 60px; }
+    .social-inner { max-width:1140px; margin:0 auto; }
+    .social-title { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--brown); margin-bottom:8px; }
+    .social-sub { font-size:.92rem; color:var(--text-soft); margin-bottom:28px; }
+    .social-cards { display:flex; gap:20px; flex-wrap:wrap; }
+    .social-card {
+      display:flex; align-items:center; gap:16px;
+      padding:20px 28px; border-radius:18px; text-decoration:none;
+      border:1.5px solid var(--pink-light); background:var(--pink-soft);
+      transition:transform .22s, box-shadow .22s, border-color .2s;
+      min-width:220px;
+    }
+    .social-card:hover { transform:translateY(-4px); box-shadow:0 10px 28px rgba(242,167,187,.3); border-color:var(--pink); }
+    .social-icon-wrap {
+      width:52px; height:52px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .social-icon-wrap svg { width:28px; height:28px; }
+    .ig-wrap { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+    .tt-wrap { background:#010101; }
+    .social-info h4 { font-weight:600; color:var(--brown); font-size:.95rem; margin-bottom:2px; }
+    .social-info span { font-size:.82rem; color:var(--text-soft); }
+
+    .map-section { padding:0 32px 80px; }
+    .map-inner { max-width:1140px; margin:0 auto; }
+    .map-placeholder {
+      border-radius:22px; overflow:hidden;
+      height:320px; background:linear-gradient(135deg, var(--pink-light), var(--pink-soft));
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      border:2px dashed var(--pink); color:var(--text-soft); text-align:center; gap:10px;
+    }
+    .map-placeholder span { font-size:2.5rem; }
+    .map-placeholder p { font-size:.92rem; }
+    .map-placeholder small { font-size:.78rem; opacity:.65; }
+
+    /* FAQ */
+    .faq { padding:70px 32px; background:var(--pink-soft); }
+    .faq-inner { max-width:860px; margin:0 auto; }
+    .faq-list { margin-top:44px; }
+    .faq-item {
+      background:var(--white); border-radius:14px; margin-bottom:10px;
+      border:1px solid var(--pink-light); overflow:hidden;
+    }
+    .faq-q {
+      padding:18px 22px; cursor:pointer;
+      display:flex; justify-content:space-between; align-items:center;
+      font-weight:500; color:var(--brown); font-size:.95rem;
+      transition:background .2s;
+    }
+    .faq-q:hover { background:var(--pink-soft); }
+    .faq-q .arrow { font-size:1.1rem; transition:transform .25s; color:var(--pink); }
+    .faq-item.open .faq-q .arrow { transform:rotate(180deg); }
+    .faq-a {
+      max-height:0; overflow:hidden; transition:max-height .3s ease, padding .3s;
+      padding:0 22px; font-size:.9rem; color:var(--text-soft); line-height:1.7;
+    }
+    .faq-item.open .faq-a { max-height:200px; padding:0 22px 18px; }
+
+    @media(max-width:860px){
+      .contact-inner { grid-template-columns:1fr; }
+      .fg-row { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="stripe"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo.jpg" alt="The Loafy Dough" class="nav-logo-img"/></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="order.html">Order</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="order.html" class="nav-cta">Order Now</a></li>
+    </ul>
+    <button class="ham-btn" style="display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px" onclick="toggleNav()">
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <span class="section-label">Get in Touch</span>
+  <h1 class="section-title">Visit or Contact Us</h1>
+  <p>We'd love to hear from you — for orders, questions, or just to say hello!</p>
+</div>
+
+<!-- CONTACT LAYOUT -->
+<section class="contact-wrap">
+  <div class="contact-inner">
+
+    <!-- INFO -->
+    <div class="info-side">
+      <span class="section-label">Find Us</span>
+      <h2 class="section-title">We're Here for You</h2>
+      <p class="section-sub">Whether you're stopping by in person, calling ahead, or sending us a message — we're always happy to help.</p>
+
+      <div class="info-card">
+        <div class="info-icon">📍</div>
+        <div>
+          <h4>Our Location</h4>
+          <p>ARBOR PARK MARKET<br/>San Antonio, 17700 US 281<br/>TX 78232</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">📞</div>
+        <div>
+          <h4>Phone</h4>
+          <p><a href="tel:+15551234567">+1 (555) 123-4567</a><br/>For orders, catering & custom bread</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">✉️</div>
+        <div>
+          <h4>Email</h4>
+          <p><a href="mailto:hello@theloafydough.com">hello@theloafydough.com</a><br/><a href="mailto:orders@theloafydough.com">orders@theloafydough.com</a></p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">🕐</div>
+        <div>
+          <h4>Opening Hours</h4>
+          <div class="hours-table">
+            <!-- <div class="hours-row"><span class="day">Monday – Friday</span><span class="time">7:00 am – 7:00 pm</span></div> -->
+            <div class="hours-row"><span class="day">Saturday</span><span class="time">10:00 am – 4:00 pm</span></div>
+            <div class="hours-row"><span class="day">Sunday</span><span class="time">10:00 am – 4:00 pm</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div>
+      <div class="form-box">
+        <h3>Send Us a Message</h3>
+        <div class="fg-row">
+          <div class="fg"><label>First Name</label><input type="text" id="fname" placeholder="Emma"/></div>
+          <div class="fg"><label>Last Name</label><input type="text" id="lname" placeholder="Rose"/></div>
+        </div>
+        <div class="fg"><label>Email Address</label><input type="email" id="email" placeholder="you@example.com"/></div>
+        <div class="fg"><label>Subject</label>
+          <select>
+            <option>General Enquiry</option>
+            <!-- <option>Custom Cake Order</option> -->
+            <!-- <option>Catering / Events</option> -->
+            <option>Delivery Question</option>
+            <option>Feedback / Complaint</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg"><label>Message</label><textarea id="msg" placeholder="Tell us how we can help…"></textarea></div>
+        <button class="send-btn" onclick="sendMsg()">Send Message →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOCIAL MEDIA -->
+<section class="social-section">
+  <div class="social-inner">
+    <span class="section-label">Follow Along</span>
+    <h2 class="social-title">Find Us on Social Media</h2>
+    <p class="social-sub">Stay up to date with our daily bakes, specials, and behind-the-scenes moments.</p>
+    <div class="social-cards">
+
+      <!-- INSTAGRAM -->
+      <a href="https://www.instagram.com/theloafydough" target="_blank" class="social-card">
+        <div class="social-icon-wrap ig-wrap">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+          </svg>
+        </div>
+        <div class="social-info">
+          <h4>Instagram</h4>
+          <span>@theloafydough</span>
+        </div>
+      </a>
+
+      <!-- TIKTOK -->
+      <a href="https://www.tiktok.com/@theloafydough" target="_blank" class="social-card">
+        <div class="social-icon-wrap tt-wrap">
+          <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/>
+          </svg>
+        </div>
+        <div class="social-info">
+          <h4>TikTok</h4>
+          <span>@theloafydough</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="map-inner">
+    <div class="map-placeholder">
+      <span>📌</span>
+      <p><strong>ARBOR PARK MARKET<br/>San Antonio, 17700 US 281<br/>TX 78232</strong></p>
+      <small>Replace this with a Google Maps embed from maps.google.com</small>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq-inner">
+    <span class="section-label">Common Questions</span>
+    <h2 class="section-title">Frequently Asked</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <!-- <div class="faq-q" onclick="toggleFaq(this)">How far in advance should I order? <span class="arrow">▾</span></div> -->
+        <!-- <div class="faq-a">For standard items, we recommend at least 2 hours ahead. Custom cakes and large catering orders need at least 48–72 hours notice.</div> -->
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you offer delivery? <span class="arrow">▾</span></div>
+        <!-- <div class="faq-a">Yes! We deliver within a 5-mile radius of our store. Delivery is free for orders over $25. Orders must be placed at least 2 hours before the desired delivery time.</div> -->
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I order a custom loaf? <span class="arrow">▾</span></div>
+        <!-- <div class="faq-a">Absolutely! We love creating bespoke cakes for birthdays, weddings, and special events. Send us an email at orders@theloafydough.com or use the contact form above with your requirements.</div> -->
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you bake for dietary requirements? <span class="arrow">▾</span></div>
+        <!-- <div class="faq-a">We offer several gluten-free and vegan options. Please mention your dietary needs when ordering and we'll do our best to accommodate you. Contact us to discuss specific allergies.</div> -->
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept? <span class="arrow">▾</span></div>
+        <!-- <div class="faq-a">We accept cash, all major credit and debit cards, Apple Pay, Google Pay, and other digital wallets at our store and upon delivery.</div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">The Loafy Dough</div>
+      <p>Handcrafted bakes made fresh every morning. We believe great food brings people together.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <!-- <p>Mon–Fri: 7am – 7pm</p> -->
+      <p>Saturday: 10am – 4pm</p>
+      <p>Sunday: 10am – 4pm</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>ARBOR PARK MARKET
+San Antonio, 17700 US 281
+TX 78232</p>
+      <p>+1 (555) 123-4567</p>
+      <p>hello@theloafydough.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 The Loafy Dough Cottage Bakery. Baked with 🩷 daily.</div>
+</footer>
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+<script src="contact.js"></script>
+</body>
+</html>

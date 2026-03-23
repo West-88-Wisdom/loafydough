@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Loafy Dough — Menu</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* FILTER TABS */
+    .filter-bar {
+      background: var(--white);
+      padding: 28px 32px;
+      border-bottom: 1px solid var(--pink-light);
+      position: sticky; top: 64px; z-index: 100;
+    }
+    .filter-inner {
+      max-width:1140px; margin:0 auto;
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .filter-label { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-soft); margin-right:6px; }
+    .tab {
+      padding:8px 22px; border-radius:24px; border:1.5px solid var(--pink-light);
+      background:transparent; cursor:pointer;
+      font-family:'DM Sans',sans-serif; font-size:.84rem; font-weight:500;
+      color:var(--text-mid); transition:all .2s;
+    }
+    .tab.active, .tab:hover { background:var(--pink); border-color:var(--pink); color:#fff; }
+
+    /* MENU GRID */
+    .menu-section { padding:60px 32px 90px; }
+    .menu-inner { max-width:1140px; margin:0 auto; }
+    .menu-grid {
+      display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:28px;
+      margin-top:14px;
+    }
+    .menu-card {
+      background:var(--white); border-radius:22px; overflow:hidden;
+      border:1px solid var(--pink-light);
+      box-shadow:0 3px 16px rgba(122,79,46,.07);
+      transition:transform .25s, box-shadow .25s;
+      display:flex; flex-direction:column;
+    }
+    .menu-card:hover { transform:translateY(-6px); box-shadow:0 12px 34px rgba(242,167,187,.3); }
+    .menu-card-img {
+      height:200px; display:flex; align-items:center; justify-content:center;
+      font-size:4.5rem; position:relative;
+    }
+    .menu-card-img.pastry { background:linear-gradient(135deg,#fde8ef,#f7ccd8); }
+    .menu-card-img.cake   { background:linear-gradient(135deg,#fce4ec,#f48fb1 80%); }
+    .menu-card-img.bread  { background:linear-gradient(135deg,#f5ede6,#c69b7b 80%); }
+    .menu-card-img.drink  { background:linear-gradient(135deg,#fde8ef,#f2a7bb 80%); }
+    .cat-badge {
+      position:absolute; top:12px; left:12px;
+      background:rgba(255,255,255,.88); backdrop-filter:blur(4px);
+      font-size:.68rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase;
+      color:var(--brown); padding:4px 12px; border-radius:14px;
+    }
+    .menu-card-body { padding:22px; flex:1; display:flex; flex-direction:column; }
+    .menu-card-body h3 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.25rem; color:var(--brown); margin-bottom:7px;
+    }
+    .menu-card-body p { font-size:.88rem; color:var(--text-soft); line-height:1.6; flex:1; margin-bottom:18px; }
+    .menu-card-footer { display:flex; justify-content:space-between; align-items:center; }
+    .price { font-size:1.1rem; font-weight:600; color:var(--brown); }
+    .add-btn {
+      background:var(--pink); color:#fff; border:none; border-radius:22px;
+      padding:8px 20px; font-size:.84rem; font-weight:500; cursor:pointer;
+      font-family:'DM Sans',sans-serif; transition:all .2s;
+    }
+    .add-btn:hover { background:var(--brown); transform:scale(1.04); }
+
+    /* EMPTY STATE */
+    .empty { text-align:center; padding:60px 20px; color:var(--text-soft); }
+    .empty span { font-size:3rem; display:block; margin-bottom:14px; }
+
+    @media(max-width:700px){ .menu-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="stripe"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo.jpg" alt="The Loafy Dough" class="nav-logo-img"/></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html" class="active">Menu</a></li>
+      <li><a href="order.html">Order</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="order.html" class="nav-cta">Order Now</a></li>
+    </ul>
+    <button class="ham-btn" style="display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px" onclick="toggleNav()">
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <span class="section-label">What We Bake</span>
+  <h1 class="section-title">Our Full Menu</h1>
+  <p>Everything baked fresh in-house each morning. Browse by category and order your favourites.</p>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <span class="filter-label">Filter:</span>
+    <button class="tab active" onclick="filter('all',this)">All Items</button>
+    <button class="tab" onclick="filter('pastry',this)">🥐 Pastries</button>
+    <button class="tab" onclick="filter('cake',this)">🎂 Cakes</button>
+    <button class="tab" onclick="filter('bread',this)">🍞 Breads</button>
+    <button class="tab" onclick="filter('drink',this)">☕ Drinks</button>
+  </div>
+</div>
+
+<!-- MENU GRID -->
+<section class="menu-section">
+  <div class="menu-inner">
+    <div class="menu-grid" id="menuGrid"></div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">The Loafy Dough</div>
+      <p>Handcrafted bakes made fresh every morning. We believe great food brings people together.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <!-- <p>Mon–Fri: 7am – 7pm</p> -->
+      <p>Saturday: 10am – 4pm</p>
+      <p>Sunday: 10am – 4pm</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>ARBOR PARK MARKET San Antonio, 17700 US 281 TX 78232</p>
+      <p>+1 (555) 123-4567</p>
+      <p>hello@theloafydough.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 The Loafy Dough Cottage Bakery. Baked with 🩷 daily.</div>
+</footer>
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+<script src="menu.js"></script>
+</body>
+</html>

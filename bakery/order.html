@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Loafy Dough — Order</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .order-wrap { padding:60px 32px 90px; }
+    .order-inner { max-width:1140px; margin:0 auto; display:grid; grid-template-columns:1fr 420px; gap:48px; align-items:start; }
+
+    /* LEFT - ITEM PICKER */
+    .picker-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.6rem; color:var(--brown); margin-bottom:22px;
+    }
+    .pick-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:36px; }
+    .pick-card {
+      border:1.5px solid var(--pink-light); border-radius:16px; padding:16px;
+      display:flex; gap:12px; align-items:center; cursor:pointer;
+      transition:all .2s; background:var(--white);
+    }
+    .pick-card:hover { border-color:var(--pink); box-shadow:0 4px 14px rgba(242,167,187,.22); }
+    .pick-card.selected { border-color:var(--brown); background:var(--brown-pale); }
+    .pick-emoji { font-size:2rem; width:48px; text-align:center; flex-shrink:0; }
+    .pick-info h4 { font-size:.92rem; font-weight:500; color:var(--brown); margin-bottom:2px; }
+    .pick-info span { font-size:.8rem; color:var(--text-soft); }
+    .pick-price { font-size:.9rem; font-weight:600; color:var(--brown); margin-left:auto; flex-shrink:0; }
+
+    /* RIGHT - ORDER SUMMARY + FORM */
+    .order-sidebar { position:sticky; top:90px; }
+    .sidebar-box {
+      background:var(--pink-soft); border-radius:22px; padding:30px;
+      border:1px solid var(--pink-light);
+    }
+    .sidebar-box h3 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.35rem; color:var(--brown); margin-bottom:20px;
+      padding-bottom:14px; border-bottom:1px solid var(--pink-light);
+    }
+    .cart-items { min-height:60px; margin-bottom:16px; }
+    .cart-empty { text-align:center; color:var(--text-soft); font-size:.9rem; padding:20px 0; }
+    .cart-row {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 0; border-bottom:1px solid var(--pink-mid); gap:8px;
+    }
+    .cart-row-name { font-size:.88rem; color:var(--text-dark); flex:1; }
+    .qty-ctrl { display:flex; align-items:center; gap:8px; }
+    .qty-btn {
+      width:26px; height:26px; border-radius:50%; border:1.5px solid var(--pink);
+      background:transparent; cursor:pointer; font-size:1rem; line-height:1;
+      color:var(--brown); transition:all .2s; display:flex; align-items:center; justify-content:center;
+    }
+    .qty-btn:hover { background:var(--pink); color:#fff; }
+    .qty-num { font-size:.88rem; font-weight:500; min-width:18px; text-align:center; }
+    .cart-row-price { font-size:.88rem; font-weight:600; color:var(--brown); min-width:46px; text-align:right; }
+    .del-btn { background:none; border:none; cursor:pointer; color:var(--pink); font-size:1rem; padding:0 4px; }
+
+    .order-total {
+      display:flex; justify-content:space-between;
+      font-weight:600; font-size:1rem; color:var(--brown);
+      padding-top:14px; margin-top:4px;
+    }
+
+    /* FORM */
+    .form-section { margin-top:24px; border-top:1px solid var(--pink-light); padding-top:22px; }
+    .form-section h4 { font-size:.82rem; letter-spacing:.1em; text-transform:uppercase; color:var(--text-soft); margin-bottom:14px; }
+    .fg { margin-bottom:14px; }
+    .fg label { display:block; font-size:.78rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--text-mid); margin-bottom:5px; }
+    .fg input, .fg select, .fg textarea {
+      width:100%; padding:10px 14px; border-radius:10px;
+      border:1.5px solid var(--pink-light); background:var(--white);
+      font-family:'DM Sans',sans-serif; font-size:.9rem; color:var(--text-dark);
+      outline:none; transition:border .2s;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--pink); }
+    .fg textarea { min-height:70px; resize:vertical; }
+    .fg-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .submit-btn {
+      width:100%; padding:14px; background:var(--brown); color:#fff;
+      border:none; border-radius:32px; font-size:.95rem; font-weight:500;
+      font-family:'DM Sans',sans-serif; cursor:pointer; letter-spacing:.04em;
+      margin-top:18px; transition:all .2s;
+    }
+    .submit-btn:hover { background:var(--brown-strip); transform:translateY(-1px); }
+    .submit-btn:disabled { opacity:.5; cursor:not-allowed; transform:none; }
+
+    .delivery-toggle { display:flex; gap:10px; }
+    .toggle-opt {
+      flex:1; padding:9px; border:1.5px solid var(--pink-light); border-radius:10px;
+      text-align:center; cursor:pointer; font-size:.86rem; color:var(--text-mid);
+      transition:all .2s; font-family:'DM Sans',sans-serif; background:var(--white);
+    }
+    .toggle-opt.active { border-color:var(--brown); background:var(--brown-pale); color:var(--brown); font-weight:500; }
+
+    @media(max-width:900px){
+      .order-inner { grid-template-columns:1fr; }
+      .pick-grid { grid-template-columns:1fr; }
+      .order-sidebar { position:static; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="stripe"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo.jpg" alt="The Loafy Dough" class="nav-logo-img"/></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="order.html" class="active">Order</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="order.html" class="nav-cta">Order Now</a></li>
+    </ul>
+    <button class="ham-btn" style="display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px" onclick="toggleNav()">
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <span class="section-label">Place Your Order</span>
+  <h1 class="section-title">Order Online</h1>
+  <p>Select your items below, fill in your details, and we'll have everything ready for you.</p>
+</div>
+
+<div class="order-wrap">
+  <div class="order-inner">
+
+    <!-- ITEM PICKER -->
+    <div>
+      <h2 class="picker-title">Choose Your Items</h2>
+      <div class="pick-grid" id="pickGrid"></div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="order-sidebar">
+      <div class="sidebar-box">
+        <h3>🛒 Your Order</h3>
+        <div class="cart-items" id="cartItems">
+          <div class="cart-empty">No items yet — pick something delicious!</div>
+        </div>
+        <div class="order-total">
+          <span>Total</span>
+          <span id="totalPrice">$0.00</span>
+        </div>
+
+        <div class="form-section">
+          <h4>Your Details</h4>
+          <div class="fg-row">
+            <div class="fg"><label>First Name</label><input type="text" id="fname" placeholder="Emma"/></div>
+            <div class="fg"><label>Last Name</label><input type="text" id="lname" placeholder="Rose"/></div>
+          </div>
+          <div class="fg"><label>Email</label><input type="email" id="email" placeholder="you@example.com"/></div>
+          <div class="fg"><label>Phone</label><input type="tel" id="phone" placeholder="+1 (555) 000-0000"/></div>
+        </div>
+
+        <div class="form-section">
+          <h4>Fulfilment</h4>
+          <div class="delivery-toggle">
+            <button class="toggle-opt active" id="opt-pickup" onclick="setOpt('pickup')">🏠 Pickup</button>
+            <button class="toggle-opt" id="opt-delivery" onclick="setOpt('delivery')">🚚 Delivery</button>
+          </div>
+          <div id="addressField" style="display:none;margin-top:12px">
+            <div class="fg"><label>Delivery Address</label><input type="text" placeholder="123 Main St, New York"/></div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="fg"><label>Special Requests</label><textarea placeholder="Allergies, custom decorations, notes…"></textarea></div>
+        </div>
+
+        <button class="submit-btn" id="submitBtn" onclick="submitOrder()">Place Order →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="stripe"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">The Loafy Dough</div>
+      <p>Handcrafted bakes made fresh every morning. We believe great food brings people together.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <!-- <p>Mon–Fri: 7am – 7pm</p> -->
+      <p>Saturday: 10am – 4pm</p>
+      <p>Sunday: 10am – 4pm</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>ARBOR PARK MARKET San Antonio, 17700 US 281 TX 78232</p>
+      <p>+1 (555) 123-4567</p>
+      <p>hello@theloafydough.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 The Loafy Dough Cottage Bakery. Baked with 🩷 daily.</div>
+</footer>
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+<script src="order.js"></script>
+</body>
+</html>

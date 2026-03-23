@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Loafy Dough — Home</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      background: linear-gradient(140deg, var(--pink-soft) 0%, var(--pink-light) 55%, #fce4ec 100%);
+      display: flex; align-items: center;
+      padding: 60px 32px; position: relative; overflow: hidden;
+    }
+    .hero-blob1 {
+      position:absolute; top:-80px; right:-100px;
+      width:500px; height:500px; border-radius:50%;
+      background:radial-gradient(circle, var(--pink) 0%, transparent 68%); opacity:.3;
+    }
+    .hero-blob2 {
+      position:absolute; bottom:-100px; left:-80px;
+      width:380px; height:380px; border-radius:50%;
+      background:radial-gradient(circle, var(--brown-light) 0%, transparent 68%); opacity:.18;
+    }
+    .hero-inner {
+      max-width:1140px; margin:0 auto; width:100%;
+      display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+      position:relative; z-index:1;
+    }
+    .hero-tag {
+      display:inline-flex; align-items:center; gap:8px;
+      background:var(--brown); color:#fff;
+      font-size:.72rem; letter-spacing:.14em; text-transform:uppercase;
+      padding:6px 18px; border-radius:22px; margin-bottom:22px;
+      animation: fadeUp .6s ease both;
+    }
+    .hero h1 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(3rem,6vw,5.2rem);
+      line-height:1.08; color:var(--brown);
+      margin-bottom:22px;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero h1 em { color:var(--pink); font-style:italic; }
+    .hero-desc {
+      font-size:1.05rem; color:var(--text-soft); font-weight:300;
+      line-height:1.75; margin-bottom:34px;
+      animation: fadeUp .7s .2s ease both;
+    }
+    .hero-btns { display:flex; gap:14px; flex-wrap:wrap; animation:fadeUp .7s .3s ease both; }
+    .hero-visual {
+      display:flex; align-items:center; justify-content:center;
+      animation: fadeUp .8s .15s ease both;
+    }
+    .hero-circle {
+      width:420px; height:420px; border-radius:50%;
+      background:linear-gradient(145deg, var(--pink-mid), var(--pink));
+      display:flex; align-items:center; justify-content:center;
+      font-size:8rem; position:relative;
+      box-shadow:0 20px 60px rgba(242,167,187,.4);
+    }
+    .hero-circle::before {
+      content:''; position:absolute; inset:-12px; border-radius:50%;
+      border:2px dashed var(--pink-mid); animation:spin 18s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* STATS BAND */
+    .stats-band {
+      background:var(--brown); padding:30px 32px;
+    }
+    .stats-inner {
+      max-width:1140px; margin:0 auto;
+      display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center;
+    }
+    .stat-num {
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.4rem; color:var(--pink); font-weight:700; line-height:1;
+    }
+    .stat-label { font-size:.8rem; color:rgba(255,255,255,.65); margin-top:4px; letter-spacing:.06em; text-transform:uppercase; }
+
+    /* FEATURED */
+    .featured { padding:90px 32px; background:var(--white); }
+    .featured-inner { max-width:1140px; margin:0 auto; }
+    .featured-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:44px; }
+    .featured-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+    .feat-card {
+      border-radius:22px; overflow:hidden;
+      box-shadow:0 4px 18px rgba(122,79,46,.09);
+      transition:transform .25s, box-shadow .25s; background:var(--white);
+      border:1px solid var(--pink-light);
+    }
+    .feat-card:hover { transform:translateY(-6px); box-shadow:0 14px 36px rgba(242,167,187,.3); }
+    .feat-img {
+      height:200px; display:flex; align-items:center; justify-content:center;
+      font-size:4rem;
+      background:linear-gradient(135deg, var(--pink-soft), var(--pink-light));
+    }
+    .feat-body { padding:22px 22px 26px; }
+    .feat-body h3 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.3rem; color:var(--brown); margin-bottom:6px;
+    }
+    .feat-body p { font-size:.88rem; color:var(--text-soft); line-height:1.6; margin-bottom:16px; }
+    .feat-footer { display:flex; justify-content:space-between; align-items:center; }
+    .feat-price { font-size:1.1rem; font-weight:600; color:var(--brown); }
+
+    /* WHY US */
+    .why { padding:90px 32px; background:var(--pink-soft); }
+    .why-inner { max-width:1140px; margin:0 auto; }
+    .why-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:50px; }
+    .why-card {
+      background:var(--white); border-radius:20px; padding:30px 24px;
+      text-align:center; border:1px solid var(--pink-light);
+      transition:transform .2s, box-shadow .2s;
+    }
+    .why-card:hover { transform:translateY(-4px); box-shadow:0 10px 28px rgba(242,167,187,.25); }
+    .why-icon {
+      width:62px; height:62px; border-radius:50%;
+      background:var(--pink-light); display:flex; align-items:center; justify-content:center;
+      font-size:1.6rem; margin:0 auto 18px;
+    }
+    .why-card h3 { font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--brown); margin-bottom:8px; }
+    .why-card p { font-size:.86rem; color:var(--text-soft); line-height:1.6; }
+
+    /* TESTIMONIALS */
+    .testimonials { padding:90px 32px; background:var(--white); }
+    .test-inner { max-width:1140px; margin:0 auto; text-align:center; }
+    .test-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:50px; text-align:left; }
+    .test-card {
+      background:var(--pink-soft); border-radius:20px; padding:28px;
+      border:1px solid var(--pink-light);
+    }
+    .stars { color:var(--pink); font-size:1rem; margin-bottom:12px; }
+    .test-card p { font-size:.92rem; color:var(--text-mid); line-height:1.65; font-style:italic; margin-bottom:18px; }
+    .test-author { font-size:.82rem; font-weight:500; color:var(--brown); }
+
+    /* CTA BAND */
+    .cta-band {
+      background:linear-gradient(135deg, var(--brown) 0%, var(--brown-strip) 100%);
+      padding:70px 32px; text-align:center;
+    }
+    .cta-band h2 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2rem,4vw,3rem); color:#fff; margin-bottom:14px;
+    }
+    .cta-band p { color:rgba(255,255,255,.75); font-size:1rem; margin-bottom:32px; }
+
+    @media(max-width:900px){
+      .hero-inner { grid-template-columns:1fr; text-align:center; }
+      .hero-btns { justify-content:center; }
+      .hero-visual { display:none; }
+      .featured-grid, .why-grid, .test-grid { grid-template-columns:1fr 1fr; }
+      .stats-inner { grid-template-columns:1fr 1fr; gap:24px; }
+      .featured-header { flex-direction:column; gap:16px; align-items:flex-start; }
+    }
+    @media(max-width:560px){
+      .featured-grid, .why-grid, .test-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="stripe"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo.jpg" alt="The Loafy Dough" class="nav-logo-img"/></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="order.html">Order</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="order.html" class="nav-cta">Order Now</a></li>
+    </ul>
+    <button class="ham-btn" style="display:none;background:none;border:none;cursor:pointer;padding:6px;flex-direction:column;gap:5px" onclick="toggleNav()">
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+      <span style="display:block;width:24px;height:2px;background:var(--brown);border-radius:2px"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob1"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">🥐 Freshly Baked Every Morning</div>
+      <h1>Where Every<br/>Bite is <em>Bliss</em></h1>
+      <p class="hero-desc">Artisan pastries, dreamy cakes, and wholesome breads crafted from scratch daily. Come taste the difference that love makes.</p>
+      <div class="hero-btns">
+        <a href="menu.html" class="btn btn-primary">View Our Menu</a>
+        <a href="order.html" class="btn btn-outline">Order Online</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-circle">🥐</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div><div class="stat-num">10+</div><div class="stat-label">Menu Items</div></div>
+    <div><div class="stat-num">500+</div><div class="stat-label">Happy Customers</div></div>
+    <div><div class="stat-num">8</div><div class="stat-label">Years Baking</div></div>
+    <div><div class="stat-num">100%</div><div class="stat-label">Fresh Daily</div></div>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<section class="featured">
+  <div class="featured-inner">
+    <div class="featured-header">
+      <div>
+        <span class="section-label">Customer Favourites</span>
+        <h2 class="section-title">Our Best Sellers</h2>
+      </div>
+      <a href="menu.html" class="btn btn-outline">Full Menu →</a>
+    </div>
+    <div class="featured-grid">
+      <div class="feat-card">
+        <div class="feat-img">🥐</div>
+        <div class="feat-body">
+          <h3>Butter Croissant</h3>
+          <p>Golden, flaky layers baked fresh every morning with premium French butter.</p>
+          <div class="feat-footer">
+            <span class="feat-price">$3.50</span>
+            <a href="order.html" class="btn btn-pink">Order</a>
+          </div>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img">🍓</div>
+        <div class="feat-body">
+          <h3>Strawberry Cake</h3>
+          <p>Light vanilla sponge layered with fresh strawberry cream and berry jam.</p>
+          <div class="feat-footer">
+            <span class="feat-price">$5.00</span>
+            <a href="order.html" class="btn btn-pink">Order</a>
+          </div>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img">🧁</div>
+        <div class="feat-body">
+          <h3>Pink Velvet Cupcake</h3>
+          <p>Soft rose-tinted velvet cake topped with silky vanilla buttercream rosette.</p>
+          <div class="feat-footer">
+            <span class="feat-price">$4.50</span>
+            <a href="order.html" class="btn btn-pink">Order</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="why-inner">
+    <span class="section-label">Why Choose Us</span>
+    <h2 class="section-title">Baked with Intention</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🌾</div>
+        <h3>Fresh Ingredients</h3>
+        <p>We source locally every morning. No preservatives, no shortcuts — ever.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">👩‍🍳</div>
+        <h3>Expert Bakers</h3>
+        <p>Our team brings decades of pastry craft to every loaf and layer cake.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🚚</div>
+        <h3>Fast Delivery</h3>
+        <p>Same-day delivery within 5 miles. Free for orders over $25.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎂</div>
+        <h3>Custom Orders</h3>
+        <p>Need a personalised cake? We craft bespoke creations for every occasion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="test-inner">
+    <span class="section-label">What People Say</span>
+    <h2 class="section-title">Loved by Our Community</h2>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>"We go every weekend to get our cinnamon roll trays.We also get extras to share with family and friends.Hands down the best in Texas!!!.All of our friends and family agree and are excited to receive them.Thanks Loafy Dough!!!."</p>
+        <div class="test-author">— Mary Barnett</div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>"So, my father visited them while he was on his trip, and compared to other similar restaurants, by far this was the most realistic pricing. The best item he found was how the attention to service you get. Most of the time its just hello, pay, bye, but they actuslly asked how was it before asking anything else."</p>
+        <div class="test-author">— Hamza Chohan</div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <p>"I stumbled across this booth at the farmers market and honestly couldn’t believe it wasn’t lined up. These sourdough cinnamon rolls are on another level.
+You can tell right away this guy actually cares about what he’s making. He’s using sourdough, goat’s milk, no seed oils, no preservatives. It’s real food, not the usual sugary shortcut stuff you see everywhere else.
+As someone who tries to be mindful about what I eat, this is exactly the kind of dessert I want. It tastes amazing but you also feel good about it. That’s rare.
+Everything is made properly, freezes well, and still tastes incredible after. The quality and effort here is top notch, and it deserves way more attention than it’s getting.
+If you see this stand, do not skip it. This is how food should be made.
+"</p>
+        <div class="test-author">— Marcos T</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <h2>Ready to Treat Yourself?</h2>
+  <p>Browse our full menu and place your order online for pickup or delivery.</p>
+  <a href="order.html" class="btn btn-pink" style="font-size:1rem;padding:14px 38px">Place an Order →</a>
+</section>
+
+<div class="stripe"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">The Loafy Dough</div>
+      <p>Handcrafted bakes made fresh every morning. We believe great food brings people together.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <a href="index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <!-- <p>Mon–Fri: 7am – 7pm</p> -->
+      <p>Saturday: 10am – 4pm</p>
+      <p>Sunday: 10am – 4pm</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>ARBOR PARK MARKET
+San Antonio, 17700 US 281
+TX 78232</p>
+      <p>+1 (555) 123-4567</p>
+      <p>hello@theloafydough.com</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 The Loafy Dough Cottage Bakery. Baked with 🩷 daily.</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
